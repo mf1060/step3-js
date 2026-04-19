@@ -21,8 +21,6 @@ function App() {
     .then(data => setAllItems(data))
   }, []);
 
-      console.log(allItems)
-
   //Getting Cart Item Details
   useEffect(() => {
     fetch(API_URL)
@@ -31,7 +29,7 @@ function App() {
       .then(data => data.filter(i => i.inCart == true))
       //Stores all data to cart items.
       .then(items => setCartItems(items))
-  }, [])
+  })
 
 
   return (
