@@ -8,7 +8,7 @@ function Item(props) {
     //Reference: https://getbootstrap.com/docs/5.3/components/card/
     <div class="card">
         {/*Passes in data dynamically for the image and the alt text */}
-        <img class="card-img-top" src={props.item.img} alt={props.item.altImg} />
+        <a href={`/${props.item.id}`}><img class="card-img-top" src={props.item.img} alt={props.item.altImg} /></a>
         <div class="card-body">
             {/*Adds a link to each item's page based on id number */}
             <a href={`/${props.item.id}`}><h5 class="card-title">{props.item.title}</h5></a>
