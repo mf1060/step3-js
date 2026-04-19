@@ -8,7 +8,7 @@
       "img": "/pen.jpeg",
       "altImg": "Pen",
       "price": 0.75,
-      "quantity": 4
+      "quantity": 6
     },
     {
       "id": "2",
@@ -18,7 +18,7 @@
       "img": "/hand_sanitizer.jpeg",
       "altImg": "Hand Sanitizer",
       "price": 2.15,
-      "quantity": 1
+      "quantity": 5
     },
     {
       "id": "3",
@@ -28,7 +28,7 @@
       "img": "/flowers.jpeg",
       "altImg": "Flowers",
       "price": 4.95,
-      "quantity": 2
+      "quantity": 3
     },
     {
       "id": "4",
@@ -118,7 +118,7 @@
       "img": "/phone_charger.jpeg",
       "altImg": "Phone Charger",
       "price": 15.99,
-      "quantity": 3
+      "quantity": 6
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
