@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from './Card';
 
-function Search(){
-  //Adds a state for all items in the server
-  const [allItems, setAllItems] = useState([])
+function Search(props){
   //Adds a state for all items that respond to the search results
   const [items, setItems] = useState([])
-  //Variable for the url to the server
-  const API_URL = 'http://localhost:5000/items';
-
-  useEffect(() => {
-    //Fetches data from the server and 
-    //stores all of the product items
-    fetch(API_URL)
-    .then(res => res.json())
-    .then(data => setAllItems(data))
-  }, []);
 
   //This is similar to the search function we developed in class. 
   const handleSearch = () => {
@@ -23,7 +11,7 @@ function Search(){
     const inputText = document.getElementById('search').value;
     //On change, the function would display any item that matches language in the search term.
     //Stores all items that match the search term to the items variable.
-    setItems(allItems.filter(items => items.title.toLowerCase().includes(inputText)));
+    setItems(props.allItems.filter(items => items.title.toLowerCase().includes(inputText)));
   }
 
   return(
@@ -42,15 +30,11 @@ function Search(){
           <Card item={t} />
           </div>
         )
-      }
-
-      )}
+      })}
   
     </div>
     </>
-
   );
-
 }
 
 export default Search;

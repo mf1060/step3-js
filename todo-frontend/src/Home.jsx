@@ -1,6 +1,6 @@
 import Carousel from "./Carousel";
 
-function Home(){
+function Home(props){
 
     return(
         <>
@@ -12,7 +12,7 @@ function Home(){
                 <a class="btn btn-primary btn-lg" href="/Search" role="button">Search</a>
             </p>
             {/* Adds the Carousel Component */}
-            <Carousel />
+            <Carousel allItems = {props.allItems}/>
         </>
     )
 

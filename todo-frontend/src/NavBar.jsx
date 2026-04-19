@@ -4,26 +4,11 @@
 //The following is a link to small button at the top
 //https://getbootstrap.com/docs/5.0/utilities/position/
 
-import React, { useState, useEffect } from 'react';
-
-function NavBar(){
-
-    const [cartItems, setCartItems] = useState([])
-    const API_URL = 'http://localhost:5000/items';
-      
-    //Getting Cart Item Details
-        useEffect(() => {
-          fetch(API_URL)
-            .then(res => res.json())
-            //Retrieves only items where inCart = true
-            .then(data => data.filter(i => i.inCart == true))
-            //Stores all data to cart items.
-            .then(items => setCartItems(items))
-        })
+function NavBar(props){
 
     //Getting the number of items in the cart.
     let numItems = 0
-     cartItems.map((t) => {
+     props.cartItems.map((t) => {
       numItems = numItems + t.quantity
     })
 

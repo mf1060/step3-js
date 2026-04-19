@@ -1,40 +1,58 @@
 //Using React Router with the following reference: https://www.w3schools.com/react/react_router.asp
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import Cart from './ShoppingCart';
+import React, { useState, useEffect } from 'react';
+import ShoppingCart from './ShoppingCart';
 import Search from './SearchBar';
 import Home from './Home';
 import NavBar from './NavBar';
 import ItemPage from './ItemPage';
 
 function App() {
-   
+
+  const API_URL = 'http://localhost:5000/items';
+  const [allItems, setAllItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    //Fetches data from the server and 
+    //stores all of the product items
+    fetch(API_URL)
+    .then(res => res.json())
+    .then(data => setAllItems(data))
+  }, []);
+
+      console.log(allItems)
+
+  //Getting Cart Item Details
+  useEffect(() => {
+    fetch(API_URL)
+      .then(res => res.json())
+      //Retrieves only items where inCart = true
+      .then(data => data.filter(i => i.inCart == true))
+      //Stores all data to cart items.
+      .then(items => setCartItems(items))
+  }, [])
+
+
   return (
     <>
     <BrowserRouter>
-        <NavBar />
+        <NavBar cartItems={cartItems}/>
 
       <Routes>
         {/*Creating a route for the home page */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home allItems={allItems}/>} />
         {/*Creating a route for the search bar */}
-        <Route path="/Search" element={<Search />} />
+        <Route path="/Search" element={<Search allItems={allItems}/>} />
         {/*Creating a route for the shopping cart */}
-        <Route path="/Cart" element={<Cart />} />
+        
+        <Route path="/Cart" element={<ShoppingCart cartItems={cartItems} />} />
 
         {/*Creating a route for an ItemPage to each item in the database */}
         {/*This will likely be implemented with a map function in the future */}
-        <Route path="/1" element={<ItemPage id="1" />} />
-        <Route path="/2" element={<ItemPage id="2" />} />
-        <Route path="/3" element={<ItemPage id="3" />} />
-        <Route path="/4" element={<ItemPage id="4" />} />
-        <Route path="/5" element={<ItemPage id="5" />} />
-        <Route path="/6" element={<ItemPage id="6" />} />
-        <Route path="/7" element={<ItemPage id="7" />} />
-        <Route path="/8" element={<ItemPage id="8" />} />
-        <Route path="/9" element={<ItemPage id="9" />} />
-        <Route path="/10" element={<ItemPage id="10" />} />
-        <Route path="/11" element={<ItemPage id="11" />} />
-        <Route path="/12" element={<ItemPage id="12" />} />
+        {allItems.map((t) => (
+            <Route path={`/${t.id}`} element={<ItemPage item={t} />} />  
+        ))}
 
       </Routes>
 

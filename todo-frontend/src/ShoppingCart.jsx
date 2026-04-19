@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import QuantityToggle from './QuantityToggle';
 
-function Cart(){  
-    //Sets a state for the item data that is currently in the shopping cart.
-    const [cartItems, setCartItems] = useState([]);
-    const API_URL = 'http://localhost:5000/items';
-
-    //Getting Cart Item Details
-    useEffect(() => {
-      fetch(API_URL)
-        .then(res => res.json())
-        //Retrieves only items where inCart = true
-        .then(data => data.filter(i => i.inCart == true))
-        //Stores all data to cart items.
-        .then(items => setCartItems(items))
-    })
-
-    let cartTotal = 0
-     cartItems.map((t) => {
-      cartTotal = cartTotal + (t.price * t.quantity)
-    })
-
+function Cart(props){
+    
+  let cartTotal = 0
+  
+  props.cartItems.map((t) => {
+      cartTotal += (t.price * t.quantity)
+  })
+  
     return (
 
       //Using Bootstrap Tables to create spacing for the Cart Items
@@ -35,7 +23,7 @@ function Cart(){
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((t) => (
+          {props.cartItems.map((t) => (
             <tr key={t.id}>
               {/*Adds a link to each item page for the title */}
               <td><a href={`/${t.id}`}>{t.title}</a></td>
